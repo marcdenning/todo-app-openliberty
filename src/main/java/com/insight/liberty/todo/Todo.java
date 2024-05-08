@@ -7,14 +7,24 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "todos")
+@NamedQuery(name = "Todo.findAll", query = "SELECT t FROM Todo t")
 public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "completed")
     private boolean completed = false;
+
+    @Column(name = "due_date")
     private LocalDate dueDate;
+
+    @Column(name = "priority")
     private int priority;
 
     public Todo() {

@@ -8,6 +8,7 @@
         <feature>restfulWS-3.1</feature>
         <feature>jsonb-3.0</feature>
         <feature>mpHealth-4.0</feature>
+        <feature>persistence-3.1</feature>
     </featureManager>
 
     <variable name="default.http.port" defaultValue="9080"/>
@@ -44,4 +45,16 @@
 
     <!-- Default SSL configuration enables trust for default certificates from the Java runtime -->
     <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
+
+    <!-- Derby Library Configuration -->
+    <library id="mariadbJDBCLib">
+        <fileset dir="${shared.resource.dir}/" includes="mariadb*.jar" />
+    </library>
+
+    <!-- Datasource Configuration -->
+    <dataSource id="todojpadatasource" jndiName="jdbc/todojpadatasource" type="javax.sql.DataSource">
+        <jdbcDriver libraryRef="mariadbJDBCLib" javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource" />
+        <properties url="jdbc:mariadb://localhost:3306/TodoDB"
+                    user="todouser" password="Pa55w0rd" />
+    </dataSource>
 </server>
